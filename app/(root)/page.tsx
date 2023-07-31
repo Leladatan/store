@@ -17,10 +17,8 @@ const SetupPage: NextPage = () => {
     }, [isOpen, onOpen]);
 
     return (
-        <div className="p-4">
-            <h1>Root</h1>
-            <UserButton afterSignOutUrl="/" />
-        </div>
+        <>
+        </>
     )
 };
 
