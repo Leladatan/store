@@ -9,7 +9,7 @@ const SetupPage: NextPage = () => {
     const onOpen = useStoreModal(s => s.onOpen);
     const isOpen = useStoreModal(s => s.isOpen);
 
-    useEffect(() => {
+    useEffect((): void => {
         if (!isOpen) {
             onOpen();
         }
