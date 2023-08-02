@@ -49,7 +49,7 @@ export function DataTable<TData, TValue>({columns, data, searchKey,}: DataTableP
         <div>
             <div className="flex items-center py-4">
                 <Input
-                    placeholder="Search label..."
+                    placeholder="Search label or name..."
                     value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
                         table.getColumn(searchKey)?.setFilterValue(event.target.value)

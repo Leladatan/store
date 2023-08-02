@@ -36,4 +36,4 @@ const BillboardClient: FC<BillboardClientProps> = ({data}) => {
     );
 };
 
-export default BillboardClient
+export default BillboardClient;

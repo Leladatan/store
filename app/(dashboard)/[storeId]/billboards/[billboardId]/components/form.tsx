@@ -33,7 +33,6 @@ const BillboardForm: FC<BillboardFormProps> = ({initialData}) => {
 
     const params = useParams();
     const router = useRouter();
-    const origin = useOrigin();
 
     const title = initialData ? "Edit billboard" : "Create billboard";
     const description = initialData ? "Edit billboard" : "Add a new billboard";
