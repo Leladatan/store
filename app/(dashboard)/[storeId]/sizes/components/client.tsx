@@ -6,34 +6,35 @@ import {Plus} from "lucide-react";
 import {Separator} from "@/components/ui/separator";
 import {useParams, useRouter} from "next/navigation";
 import {FC} from "react";
-import {BillboardColumn, columns} from "@/app/(dashboard)/[storeId]/billboards/components/columns";
+import {columns} from "@/app/(dashboard)/[storeId]/sizes/components/columns";
 import {DataTable} from "@/components/ui/data-table";
 import ApiList from "@/components/ui/api-list";
+import {SizeColumn} from "@/app/(dashboard)/[storeId]/sizes/components/columns";
 
-interface BillboardClientProps {
-    data: BillboardColumn[];
+interface SizeClientProps {
+    data: SizeColumn[];
 }
 
-const BillboardClient: FC<BillboardClientProps> = ({data}) => {
+const SizeClient: FC<SizeClientProps> = ({data}) => {
     const router = useRouter();
     const params = useParams();
 
     return (
         <>
             <div className="flex items-center justify-between">
-                <Heading title={`Billboards (${data.length})`} description="Manage billboards for your store" />
-                <Button onClick={() => router.push(`/${params.storeId}/billboards/new`)}>
+                <Heading title={`Sizes (${data.length})`} description="Manage sizes for your store" />
+                <Button onClick={() => router.push(`/${params.storeId}/sizes/new`)}>
                     <Plus className="mr-2 h-4 w-4" />
                     Add New
                 </Button>
             </div>
             <Separator />
-            <DataTable searchKey="label" columns={columns} data={data} />
-            <Heading title="API" description="API calls for Billboards" />
+            <DataTable searchKey="name" columns={columns} data={data} />
+            <Heading title="API" description="API calls for Sizes" />
             <Separator />
-            <ApiList entityIdName="billboardId" entityName="billboards" />
+            <ApiList entityIdName="sizeId" entityName="sizes" />
         </>
     );
 };
 
-export default BillboardClient;
+export default SizeClient;

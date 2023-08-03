@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 import {type FC, useState} from 'react';
-import {Billboard} from "@prisma/client";
+import {Size} from "@prisma/client";
 import Heading from "@/components/ui/heading";
 import {Button} from "@/components/ui/button";
 import {Trash} from "lucide-react";
@@ -15,34 +15,33 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import {useParams, useRouter} from "next/navigation";
 import AlertModal from "@/components/modals/alert-modal";
-import ImageUpload from "@/components/ui/image-upload";
 
-interface BillboardFormProps {
-    initialData: Billboard | null;
+interface SizeFormProps {
+    initialData: Size | null;
 }
 
 const formSchema = z.object({
-    label: z.string().min(1),
-    imageUrl: z.string().min(1),
+    name: z.string().min(1),
+    value: z.string().min(1),
 });
 
-const BillboardForm: FC<BillboardFormProps> = ({initialData}) => {
+const ColorForm: FC<SizeFormProps> = ({initialData}) => {
     const [open, setOpen] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
 
     const params = useParams();
     const router = useRouter();
 
-    const title = initialData ? "Edit billboard" : "Create billboard";
-    const description = initialData ? "Edit billboard" : "Add a new billboard";
-    const toastMessage = initialData ? "Billboard update" : "Billboard created";
+    const title = initialData ? "Edit size" : "Create size";
+    const description = initialData ? "Edit size" : "Add a new size";
+    const toastMessage = initialData ? "Size update" : "Size created";
     const action = initialData ? "Saves changes" : "Create";
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: initialData || {
-            label: '',
-            imageUrl: ''
+            name: '',
+            value: ''
         }
     });
 
@@ -50,15 +49,15 @@ const BillboardForm: FC<BillboardFormProps> = ({initialData}) => {
         try {
             setLoading(true);
             if (initialData) {
-                await axios.patch(`/api/${params.storeId}/billboards/${params.billboardId}`, data);
+                await axios.patch(`/api/${params.storeId}/sizes/${params.sizeId}`, data);
             }
 
             if (!initialData) {
-                await axios.post(`/api/${params.storeId}/billboards`, data);
+                await axios.post(`/api/${params.storeId}/sizes`, data);
             }
 
             router.refresh();
-            router.push(`/${params.storeId}/billboards`);
+            router.push(`/${params.storeId}/sizes`);
             toast.success(toastMessage);
         } catch (e) {
             toast.error("Something went wrong.");
@@ -70,12 +69,12 @@ const BillboardForm: FC<BillboardFormProps> = ({initialData}) => {
     const onDelete = async () => {
         try {
             setLoading(true);
-            await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`);
+            await axios.delete(`/api/${params.storeId}/sizes/${params.sizeId}`);
             router.refresh();
-            router.push(`/${params.storeId}/billboards`);
-            toast.success("Billboard deleted.");
+            router.push(`/${params.storeId}/sizes`);
+            toast.success("Size deleted.");
         } catch (e) {
-            toast.error("Make sure you removed all categories using this billboard first.");
+            toast.error("Make sure you removed all products using this size first.");
         } finally {
             setLoading(false);
             setOpen(false);
@@ -104,33 +103,28 @@ const BillboardForm: FC<BillboardFormProps> = ({initialData}) => {
             <Separator/>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
-                    <FormField
-                        name="imageUrl"
-                        control={form.control}
-                        render={({field}) => (
-                            <FormItem>
-                                <FormLabel>Background image</FormLabel>
-                                <FormControl>
-                                    <ImageUpload
-                                        onChange={url => field.onChange(url)}
-                                        onRemove={() => field.onChange('')}
-                                        value={field.value ? [field.value] : []}
-                                        disabled={loading}
-                                    />
-                                </FormControl>
-                                <FormMessage/>
-                            </FormItem>
-                        )}
-                    />
                     <div className="grid grid-cols-3 gap-8">
                         <FormField
-                            name="label"
+                            name="name"
                             control={form.control}
                             render={({field}) => (
                                 <FormItem>
-                                    <FormLabel>Label</FormLabel>
+                                    <FormLabel>Name</FormLabel>
                                     <FormControl>
-                                        <Input disabled={loading} placeholder="Billboard label..." {...field} />
+                                        <Input disabled={loading} placeholder="Size name..." {...field} />
+                                    </FormControl>
+                                    <FormMessage/>
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            name="value"
+                            control={form.control}
+                            render={({field}) => (
+                                <FormItem>
+                                    <FormLabel>Value</FormLabel>
+                                    <FormControl>
+                                        <Input disabled={loading} placeholder="Size value..." {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -146,4 +140,4 @@ const BillboardForm: FC<BillboardFormProps> = ({initialData}) => {
     );
 };
 
-export default BillboardForm;
+export default ColorForm;
