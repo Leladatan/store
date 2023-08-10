@@ -105,7 +105,7 @@ export const GET = async (req: Request, {params}: {params: {storeId: string}}) =
                 color: true,
             },
             orderBy: {
-                createdAt: 'desc'
+                creadtedAt: 'desc'
             }
         });
 
