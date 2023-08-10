@@ -58,8 +58,6 @@ const CategoryForm: FC<CategoryFormProps> = ({initialData, billboards}) => {
                 await axios.post(`/api/${params.storeId}/categories`, data);
             }
 
-            console.log(initialData);
-            console.log(data);
             router.refresh();
             router.push(`/${params.storeId}/categories`);
             toast.success(toastMessage);

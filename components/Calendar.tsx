@@ -1,6 +1,6 @@
 "use client";
 
-import {type FC, useEffect, useMemo, useState} from 'react';
+import {type FC, useMemo, useState} from 'react';
 
 const weeks = [
     {
@@ -201,10 +201,6 @@ const Calendar: FC = () => {
     const nextYear = (): void => {
         setPanelYear(panelYear + 1);
     };
-
-    useEffect(() => {
-        console.log(panelMonth)
-    }, [panelMonth]);
 
     return (
         <div className="flex flex-col items-center justify-center">
