@@ -4,21 +4,17 @@ import {NextResponse} from "next/server";
 import {stripe} from "@/lib/stripe";
 import prismadb from "@/lib/prismadb";
 
-const cors = require('micro-cors')();
-
 const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
 };
 
-async function OPTIONS() {
+export async function OPTIONS() {
     return NextResponse.json({}, {headers: corsHeaders});
 }
 
-module.exports = cors(OPTIONS);
-
-async function POST(
+export async function POST(
     req: Request,
     {params}: {
         params: {
@@ -89,5 +85,3 @@ async function POST(
         headers: corsHeaders
     });
 }
-
-module.exports = cors(POST);
