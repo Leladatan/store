@@ -3,10 +3,12 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import {ClerkProvider} from "@clerk/nextjs";
 import {ModalProvider} from "@/providers/modal-provider";
-import prismadb from "@/lib/prismadb";
 import {ToastProvider} from "@/providers/toast-provider";
+import ThemesProvider from "@/providers/themes-provider";
+import {NextFont} from "next/dist/compiled/@next/font";
+import {cn} from "@/lib/utils";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter: NextFont = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Store E-COM',
@@ -21,10 +23,12 @@ export default function RootLayout({
   return (
     <ClerkProvider>
         <html lang="en">
-        <body className={inter.className}>
-        <ToastProvider />
-        <ModalProvider />
-        {children}
+        <body className={cn("transition-colors", inter.className)}>
+        <ThemesProvider>
+            <ToastProvider />
+            <ModalProvider />
+            {children}
+        </ThemesProvider>
         </body>
         </html>
     </ClerkProvider>
