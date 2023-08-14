@@ -9,7 +9,7 @@ interface MainNavProps {
     className: string;
 }
 
-const MainNav: FC<MainNavProps> = ({className, ...props}) => {
+const MainNav: FC<MainNavProps> = ({className}) => {
     const pathname: string = usePathname();
     const params = useParams();
     const routes: {href: string, label: string, active: boolean}[] = useMemo(() => [
