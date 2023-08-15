@@ -166,14 +166,14 @@ const Calendar: FC = () => {
         const nextMonthDays = getNextMonthDays(panelYear, panelMonth);
 
         return [...prevMonthDays, ...currentMonthDays, ...nextMonthDays];
-    }, [panelYear, panelMonth])
+    }, [panelYear, panelMonth]);
 
     const prevMonth = (): void => {
         if (panelMonth === 0) {
             setPanelMonth(11);
             setPanelYear(panelYear - 1);
         } else {
-            setPanelMonth(panelMonth - 1)
+            setPanelMonth(panelMonth - 1);
         }
     };
 
