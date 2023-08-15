@@ -35,61 +35,40 @@ const weeks = [
 
 const months = [
     {
-        index: 0,
         value: 'Январь',
     },
     {
-        index: 1,
         value: 'Февраль',
     },
     {
-        index: 2,
         value: 'Март',
     },
     {
-        index: 3,
         value: 'Апрель',
     },
     {
-        index: 4,
         value: 'Май',
     },
     {
-        index: 5,
         value: 'Июнь',
     },
     {
-        index: 6,
         value: 'Июль',
     },
     {
-        index: 7,
         value: 'Август',
     },
     {
-        index: 8,
         value: 'Сентябрь',
     },
     {
-        index: 9,
         value: 'Октябрь',
     },
     {
-        index: 10,
         value: 'Ноябрь',
     },
     {
-        index: 11,
         value: 'Декабрь',
-    },
-];
-
-const years = [
-    {
-        value: 2023,
-    },
-    {
-        value: 2024,
     },
 ];
 
@@ -218,7 +197,7 @@ const Calendar: FC = () => {
     return (
         <div className="flex flex-col items-center justify-center">
             <div>
-                {panelMonth + 1}/{panelYear}
+                {months[panelMonth].value}/{panelYear}
             </div>
             <div className="flex flex-col gap-4">
                 <div className="flex gap-4 items-center">
