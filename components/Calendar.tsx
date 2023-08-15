@@ -93,6 +93,15 @@ const years = [
     },
 ];
 
+const sundayWeekToMondayWeekDayMap: Record<number, number> = {
+    0: 6,
+    1: 0,
+    2: 1,
+    3: 2,
+    4: 3,
+    5: 4,
+    6: 5,
+};
 
 
 const Calendar: FC = () => {
@@ -106,12 +115,17 @@ const Calendar: FC = () => {
         return nextMonthDate.getDate();
     };
 
-    const getPreviousMonthDays = (year: number, month: number) => {
-        const currentMonthFirstDay = new Date(year, month, 1);
-        const dayOfTheWeek = currentMonthFirstDay.getDay();
-        const prevMonthDateAmount = dayOfTheWeek - 1;
+    const getDayOfTheWeek = (date: Date) => {
+        const day: number = date.getDay();
 
-        const daysAmountInPrevMonth = getDaysAmountInAMonth(year, month - 1);
+        return sundayWeekToMondayWeekDayMap[day];
+    };
+
+    const getPreviousMonthDays = (year: number, month: number) => {
+        const currentMonthFirstDay: Date = new Date(year, month, 1);
+        const prevMonthDateAmount: number = getDayOfTheWeek(currentMonthFirstDay);
+
+        const daysAmountInPrevMonth: number = getDaysAmountInAMonth(year, month - 1);
 
         const dateCells = [];
         const [cellYear, cellMonth] = month === 0 ? [year - 1, 11] : [year, month];
@@ -129,8 +143,7 @@ const Calendar: FC = () => {
 
     const getNextMonthDays = (year: number, month: number) => {
         const currentMonthFirstDay: Date = new Date(year, month, 1);
-        const dayOfTheWeek: number = currentMonthFirstDay.getDay();
-        const prevMonthDateAmount: number = dayOfTheWeek - 1;
+        const prevMonthDateAmount: number = getDayOfTheWeek(currentMonthFirstDay);
 
         const daysAmount: number = getDaysAmountInAMonth(year, month);
 
@@ -204,6 +217,9 @@ const Calendar: FC = () => {
 
     return (
         <div className="flex flex-col items-center justify-center">
+            <div>
+                {panelMonth + 1}/{panelYear}
+            </div>
             <div className="flex flex-col gap-4">
                 <div className="flex gap-4 items-center">
                     <button onClick={prevYear}>Prev Year</button>
