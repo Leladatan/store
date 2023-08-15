@@ -186,7 +186,7 @@ const Calendar: FC = () => {
             setPanelMonth(0);
             setPanelYear(panelYear + 1);
         } else {
-            setPanelMonth(panelMonth + 1)
+            setPanelMonth(panelMonth + 1);
         }
     };
 
@@ -213,7 +213,7 @@ const Calendar: FC = () => {
                 </div>
                 <div className="grid grid-cols-7 grid-rows-7 border">
                     {dateCells.map((cell, index) => {
-                        const isCurrentDate = cell.year === new Date().getFullYear() && cell.month === new Date().getMonth() && cell.date === new Date().getDate();
+                        const isCurrentDate: boolean = cell.year === new Date().getFullYear() && cell.month === new Date().getMonth() && cell.date === new Date().getDate();
                         return <div key={index} className="flex justify-end border w-[200px] h-[100px] p-2">
                             <p className={isCurrentDate ? "text-center text-red-500" : "text-center"}>{cell.date}</p>
                         </div>
