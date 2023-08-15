@@ -1,8 +1,8 @@
 "use client";
 
-import {type FC, useMemo, useState} from 'react';
+import {type FC, useEffect, useMemo, useState} from 'react';
 
-const weeks = [
+export const weeks = [
     {
         index: 1,
         value: "Понедельник"
@@ -33,7 +33,7 @@ const weeks = [
     },
 ];
 
-const months = [
+export const months = [
     {
         value: 'Январь',
     },
@@ -72,7 +72,7 @@ const months = [
     },
 ];
 
-const sundayWeekToMondayWeekDayMap: Record<number, number> = {
+export const sundayWeekToMondayWeekDayMap: Record<number, number> = {
     0: 6,
     1: 0,
     2: 1,
@@ -82,10 +82,14 @@ const sundayWeekToMondayWeekDayMap: Record<number, number> = {
     6: 5,
 };
 
+export const years: number[] = [new Date().getFullYear(), 2024];
 
 const Calendar: FC = () => {
     const [panelYear, setPanelYear] = useState<number>(() => new Date().getFullYear());
     const [panelMonth, setPanelMonth] = useState<number>(() => new Date().getMonth());
+
+    const [selectedMonth, setSelectedMonth] = useState<number>(new Date().getMonth());
+    const [selectedYear, setSelectedYear] = useState<number>(() => new Date().getFullYear());
 
     const getDaysAmountInAMonth = (year: number, month: number) => {
         const nextMonthDate: Date = new Date(year, month + 1, 1);
@@ -194,11 +198,42 @@ const Calendar: FC = () => {
         setPanelYear(panelYear + 1);
     };
 
+    useEffect((): void => {
+        setSelectedYear(+panelYear);
+        setSelectedMonth(+panelMonth);
+    }, [panelYear, panelMonth]);
+
     return (
         <div className="flex flex-col items-center justify-center">
             <div>
                 {months[panelMonth].value}/{panelYear}
             </div>
+            <select
+                name="month"
+                id="month"
+                value={selectedMonth}
+                onChange={(e): void => {
+                    setSelectedMonth(+e.target.value);
+                    setPanelMonth(+e.target.value);
+                }}
+            >
+                {months.map((month, index) => (
+                    <option value={index} key={index}>{month.value}</option>
+                ))}
+            </select>
+            <select
+                name="year"
+                id="year"
+                value={selectedYear}
+                onChange={(e): void => {
+                    setSelectedYear(+e.target.value);
+                    setPanelYear(+e.target.value);
+                }}
+            >
+                {years.map((year, index) => (
+                    <option value={year} key={index}>{year}</option>
+                ))}
+            </select>
             <div className="flex flex-col gap-4">
                 <div className="flex gap-4 items-center">
                     <button onClick={prevYear}>Prev Year</button>
