@@ -1,7 +1,6 @@
 "use client";
 
 import {type FC, useEffect, useMemo, useState} from 'react';
-import {auth, useUser} from "@clerk/nextjs";
 
 export const weeks = [
     {

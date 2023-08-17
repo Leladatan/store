@@ -5,7 +5,7 @@ import StoreSwitcher from "@/components/StoreSwitcher";
 import {redirect} from "next/navigation";
 import prismadb from "@/lib/prismadb";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
-import UserName from "@/components/user-name";
+import UserName from "@/components/UserName";
 
 const Navbar: FC = async () => {
     const UserId = auth().userId;
