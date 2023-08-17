@@ -6,7 +6,7 @@ import {
     PopoverTrigger
 } from "@/components/ui/popover";
 import {Store} from "@prisma/client";
-import {FC, useEffect, useState} from "react";
+import {FC, useState} from "react";
 import {useStoreModal} from "@/hooks/use-store-modal";
 import {useParams, useRouter} from "next/navigation";
 import {Button} from "@/components/ui/button";
