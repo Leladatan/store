@@ -4,7 +4,7 @@ interface IUseStoreModal {
     isOpen: boolean;
     onClose: () => void;
     onOpen: () => void;
-};
+}
 
 export const useStoreModal = create<IUseStoreModal>((set) => ({
     isOpen: false,
