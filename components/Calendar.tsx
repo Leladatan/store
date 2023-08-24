@@ -246,7 +246,7 @@ const Calendar: FC = () => {
                         <span key={week.index} className="text-center">{week.value}</span>
                     ))}
                 </div>
-                <div className="grid grid-cols-7 grid-rows-7 border">
+                <div className="grid grid-cols-7 grid-rows-6 border">
                     {dateCells.map((cell, index) => {
                         const isCurrentDate: boolean = cell.year === new Date().getFullYear() && cell.month === new Date().getMonth() && cell.date === new Date().getDate();
                         return <div key={index} className="flex justify-end border w-[200px] h-[100px] p-2">
