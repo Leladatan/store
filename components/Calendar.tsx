@@ -116,7 +116,7 @@ const Calendar: FC = () => {
         for (let i = prevMonthDateAmount - 1; i >= 0; i--) {
             dateCells.push({
                 year: cellYear,
-                month: cellMonth,
+                month: cellMonth - 1,
                 date: daysAmountInPrevMonth - i,
             });
         }
